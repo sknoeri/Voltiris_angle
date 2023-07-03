@@ -42,6 +42,7 @@ uint32_t LoopTimer;
 //Kalman filter constants
 float KalAngleRoll=0,KalUncertAngleRoll=4;
 float KalAnglePitch=0,KalUncertAnglePitch=4;
+float KalAngleYaw=0,KalUncertAngleYaw=4;
 float Kal1DOut[]={0,0};
 
 /////////////////////////////////////////////////////
@@ -259,7 +260,7 @@ float kalman_1D(float KalState, float KalUncert, float KalInput, float KalMes, f
 }
 
 void setup() {
-    Serial.begin(57600);
+    Serial.begin(115200);
     Wire.setClock(400000);
     Wire.begin();
     delay(500);
@@ -295,8 +296,13 @@ void loop() {
   if (AngleYaw<0){
     AngleYaw+= 360;
   }
-  Serial.print("Kalmann_Roll,");
-  Serial.print(KalAngleRoll);
+  kalman_1D(KalAngleYaw,KalUncertAngleYaw,RateYaw,AngleYaw,0.1);
+  KalAngleYaw=Kal1DOut[0];
+  KalUncertAngleYaw=Kal1DOut[1];
+  //Serial.print("Kalmann_Roll,");
+  //Serial.print(KalAngleRoll);
+  Serial.print("Kalmann_Yaw,");
+  Serial.print(KalAngleYaw);
   Serial.print(" Tillt,");
   Serial.print(AngleYaw);
   //Serial.print("Accel_Roll ");
