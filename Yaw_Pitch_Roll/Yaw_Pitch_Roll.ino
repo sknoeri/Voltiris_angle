@@ -1,4 +1,18 @@
 #include <Wire.h>
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
+// Wireless transmission variables
+RF24 radio(7, 8); // CE, CSN
+const byte address[6] = "00001";
+struct Data_Package {
+  float Roll = 0.0f;
+  float Pitch = 0.0f;
+  float Yaw = 0.0f;
+};
+Data_Package data; // Create a variable with the above structure
+
 // MPU 9250 stuff
 #define MPU9250_ADDRESS  0x68
 #define CONFIG           0x1A // configuration register; choose bandwidth of filter nad samplerate  for Gyro and TEmp sesor
@@ -271,6 +285,11 @@ void setup() {
     //Magenometer inctialisactions
     getAK8963CID();
     initAK8963Slave(1, 0x06);
+    // Wireless transmission send intialisation
+    radio.begin();
+    radio.openWritingPipe(address);
+    radio.setPALevel(RF24_PA_MIN);
+    radio.stopListening();
     LoopTimer=micros();
 }
 
@@ -281,9 +300,11 @@ void loop() {
   RateYaw-=RateCalibYaw;
   kalman_1D(KalAngleRoll,KalUncertAngleRoll,RateRoll,AngleRoll,0.1);
   KalAngleRoll=Kal1DOut[0];
+  data.Roll = KalAngleRoll;
   KalUncertAngleRoll=Kal1DOut[1];
   kalman_1D(KalAnglePitch,KalUncertAnglePitch,RatePitch,AnglePitch,0.1);
   KalAnglePitch=Kal1DOut[0];
+  data.Pitch = KalAnglePitch;
   KalUncertAnglePitch=Kal1DOut[1];
   //Magnetometer stuff
   float Mag_pitch = -KalAngleRoll*DegToRad;
@@ -298,17 +319,21 @@ void loop() {
   }
   kalman_1D(KalAngleYaw,KalUncertAngleYaw,RateYaw,AngleYaw,0.1);
   KalAngleYaw=Kal1DOut[0];
+  data.Yaw=KalAngleYaw;
   KalUncertAngleYaw=Kal1DOut[1];
+  
+  radio.write(&data, sizeof(Data_Package));
+  
   //Serial.print("Kalmann_Roll,");
   //Serial.print(KalAngleRoll);
-  Serial.print("Kalmann_Yaw,");
-  Serial.print(KalAngleYaw);
-  Serial.print(" Tillt,");
-  Serial.print(AngleYaw);
+  //Serial.print("Kalmann_Yaw,");
+  //Serial.print(KalAngleYaw);
+  //Serial.print(" Tillt,");
+  //Serial.print(AngleYaw);
   //Serial.print("Accel_Roll ");
   //Serial.print(AngleRoll);
-  Serial.print(" Kalmann_pitch,");
-  Serial.println(KalAnglePitch);
+  //Serial.print(" Kalmann_pitch,");
+  //Serial.println(KalAnglePitch);
   //Serial.print(" Accel_Acc ");
   //Serial.println(AnglePitch);
   while(micros()-LoopTimer<100000);
