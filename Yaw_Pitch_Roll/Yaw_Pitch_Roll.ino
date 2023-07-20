@@ -6,7 +6,7 @@
 // Wireless transmission variables
 RF24 radio(7, 8); // CE, CSN
 const byte address[6] = "00001";
-struct Data_Package {
+struct Data_Package { // Max of 32bytes can be transmitted
   float Roll = 0.0f;
   float Pitch = 0.0f;
   float Yaw = 0.0f;
@@ -61,11 +61,11 @@ float Kal1DOut[]={0,0};
 
 /////////////////////////////////////////////////////
 //Magnetometer sutff
-const float hard_iron[3] ={42.68, -5.63, -0.84}; //Hard iron calibration from soft ware
+const float hard_iron[3] ={-3.17, 2.83, -56.51}; //Hard iron calibration from soft ware
 const float soft_iron[3][3]={        //Soft iron calibrations from soft ware
-  {0.999,0.008,-0.014},
-  {0.008,0.974,0.073},
-  {-0.014,0.073,1.033}
+  {1.056,-0.02,-0.012},
+  {-0.02,0.886,0.083},
+  {-0.012,0.083,1.077}
 };
 float Mag_x_hor, Mag_y_hor;
 float Sense_adjX, Sense_adjY,Sense_adjZ;
@@ -112,12 +112,12 @@ void gyro_sygnals(void){
   Wire.endTransmission(false); // need such that the adress pointer is not reset back to 0x00
   Wire.requestFrom(MPU9250_ADDRESS, 6); // read all 6x bite
   int16_t GyroX=Wire.read()<<8|Wire.read(); // first the high byte then the low byte Register 66 to 72 on datasheet
-  int16_t GyroY=Wire.read()<<8|Wire.read();
+  int16_t GyroY=Wire.read()<<8|Wire.read(); 
   int16_t GyroZ=Wire.read()<<8|Wire.read();
   
   RateRoll=(float)GyroX/131; //GYRO_XOUT = Gyro_Sensitivity[LSB/(°/s)] * X_angular_rate[(°/s)] Gyro_Sensitivity=131LSB/(°/s) 
   RatePitch=(float)GyroY/131;// ATENTION chekc LSB number carefully because its confusing on the datasheet hure mude.
-  RateYaw=(float)GyroZ/131;
+  RateYaw=(float)GyroZ/131; // check for rate compensation at Z value
 
   AccX = (float)AccXLSB/16384+0.03935; // Acceleration values in g
   AccY = (float)AccYLSB/16384-0.01443; // ACCEL_OUT = Acc_sensitivity[LSB/g] * Acc[g]
@@ -335,7 +335,7 @@ void loop() {
   //Serial.print(" Kalmann_pitch,");
   //Serial.println(KalAnglePitch);
   //Serial.print(" Accel_Acc ");
-  //Serial.println(AnglePitch);
+  //Serial.println(AnglePitch); 
   while(micros()-LoopTimer<100000);
   LoopTimer=micros();
   
