@@ -53,6 +53,10 @@ int RateCalibNum;
 float AccX, AccY, AccZ;
 float AngleRoll,AnglePitch,AngleYaw;
 uint32_t LoopTimer;
+//Offset calibration Accelerometer
+float AccXcalib=0.03935;
+float AccYcalib=-0.01443;
+float AccZcalib=0.03771;
 //Kalman filter constants
 float KalAngleRoll=0,KalUncertAngleRoll=4;
 float KalAnglePitch=0,KalUncertAnglePitch=4;
@@ -119,9 +123,9 @@ void gyro_sygnals(void){
   RatePitch=(float)GyroY/131;// ATENTION chekc LSB number carefully because its confusing on the datasheet hure mude.
   RateYaw=(float)GyroZ/131; // check for rate compensation at Z value
 
-  AccX = (float)AccXLSB/16384+0.03935; // Acceleration values in g
-  AccY = (float)AccYLSB/16384-0.01443; // ACCEL_OUT = Acc_sensitivity[LSB/g] * Acc[g]
-  AccZ = (float)AccZLSB/16384+0.03771;
+  AccX = (float)AccXLSB/16384+AccXcalib; // Acceleration values in g
+  AccY = (float)AccYLSB/16384+AccYcalib; // ACCEL_OUT = Acc_sensitivity[LSB/g] * Acc[g]
+  AccZ = (float)AccZLSB/16384+AccZcalib;
   AngleRoll = atan(AccY/sqrt(AccX*AccX+AccZ*AccZ))*RadToDeg;
   AnglePitch = -atan(AccX/sqrt(AccY*AccY+AccZ*AccZ))*RadToDeg;
 }
