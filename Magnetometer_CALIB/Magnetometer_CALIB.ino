@@ -1,4 +1,7 @@
 #include <Wire.h>
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
 //#include "MPU9250.h"
 
 #define MPU9250_ADDRESS  0x68
@@ -27,6 +30,16 @@ float MagX, MagY, MagZ;
 float Sense_adjX, Sense_adjY,Sense_adjZ;
 
 //MPU9250 mpu;
+
+// Wireless transmission variables
+RF24 radio(7, 8); // CE, CSN
+const byte address[6] = "00001";
+struct Data_Package { // Max of 32bytes can be transmitted
+  float MagX = 0.0f;
+  float MagY = 0.0f;
+  float MagZ = 0.0f;
+};
+Data_Package data; // Create a variable with the above structure
 
 
 
@@ -163,8 +176,6 @@ void readMagData() {
 }
 
 void setup() {
-  Serial.begin(115200);
-  delay(500);
   Wire.begin();
   Wire.setClock(400000);
   delay(500);
@@ -173,30 +184,19 @@ void setup() {
   getAK8963CID();
   //Serial.println("");
   initAK8963Slave(1, 0x06);
+  // Wireless transmission send intialisation
+  radio.begin();
+  radio.openWritingPipe(address);
+  radio.setPALevel(RF24_PA_MIN);
+  radio.stopListening();
 }
 int a = 0;
 void loop() {
   readMagData();
-  //Serial.print("X, ");
-  Serial.print("Raw:");
-  Serial.print(a);
-  Serial.print(',');
-  Serial.print(a);
-  Serial.print(',');
-  Serial.print(a);
-  Serial.print(',');
-  Serial.print(a);
-  Serial.print(',');
-  Serial.print(a);
-  Serial.print(',');
-  Serial.print(a);
-  Serial.print(',');
-  Serial.print((int)MagX*10);
-  Serial.print(",");
-  Serial.print((int)MagY*10);
-  Serial.print(",");
-  Serial.print((int)MagZ*10);
-  Serial.println();
+  data.MagX = MagX;
+  data.MagY = MagY;
+  data.MagZ = MagZ;
+  radio.write(&data, sizeof(Data_Package));
   delay(2);
   // put your main code here, to run repeatedly:
 
