@@ -2,11 +2,11 @@
 
 ## Set up the MPU-92500 for angle measurement
 
-1) Wire the MPU-92500, Arduino Nano and the NRF24L01 module correctly together. [Named Link](http://www.google.fr/ "Named link title")
+1) Wire the MPU-92500, Arduino Nano and the NRF24L01 module correctly together.
     - Use the [Pinconfiguration_angledetection.pdf] to get a picture.
     - Teh emiter module is with the MPU-92500 and the reciver module is the same but without the MPU-92500.
 
-2) Calibrate the accelerometer with [Accel_calib.ino].
+2) Calibrate the accelerometer with [Accel_calib.ino](http://www.google.fr/ "Named link title").
     - Falsh the code onto the Arduino nano asembled in the final box.
     - Put the box on a perfectly flat surface (Use a Wasserwage to check if its flat)
     - Open the Serial monitor of the Arduino IDE
