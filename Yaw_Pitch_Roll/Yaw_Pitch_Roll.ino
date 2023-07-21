@@ -123,9 +123,9 @@ void gyro_sygnals(void){
   RatePitch=(float)GyroY/131;// ATENTION chekc LSB number carefully because its confusing on the datasheet hure mude.
   RateYaw=(float)GyroZ/131; // check for rate compensation at Z value
 
-  AccX = (float)AccXLSB/16384+AccXcalib; // Acceleration values in g
-  AccY = (float)AccYLSB/16384+AccYcalib; // ACCEL_OUT = Acc_sensitivity[LSB/g] * Acc[g]
-  AccZ = (float)AccZLSB/16384+AccZcalib;
+  AccX = (float)AccXLSB/16384-AccXcalib; // Acceleration values in g
+  AccY = (float)AccYLSB/16384-AccYcalib; // ACCEL_OUT = Acc_sensitivity[LSB/g] * Acc[g]
+  AccZ = (float)AccZLSB/16384-AccZcalib;
   AngleRoll = atan(AccY/sqrt(AccX*AccX+AccZ*AccZ))*RadToDeg;
   AnglePitch = -atan(AccX/sqrt(AccY*AccY+AccZ*AccZ))*RadToDeg;
 }
