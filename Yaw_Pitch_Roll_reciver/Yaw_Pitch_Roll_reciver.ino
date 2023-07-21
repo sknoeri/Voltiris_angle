@@ -26,9 +26,9 @@ void loop() {
     Serial.print("Roll: ");
     Serial.print(data.Roll);
     Serial.print(" Pitch: ");
-    Serial.print(data.Pitch);
-    Serial.print(" Yaw: ");
-    Serial.println(data.Yaw);
+    Serial.println(data.Pitch);
+     //Serial.print(" Yaw: ");
+     //Serial.println(data.Yaw);
   }
   
 }

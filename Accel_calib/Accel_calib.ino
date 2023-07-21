@@ -30,15 +30,6 @@ Data_Package data; // Create a variable with the above structure
 #define USER_CTRL        0x6A // Contol register of the MPU 9250 used for setting into ItC master mode etc
 #define PWR_MGMT_1       0x6B // Select the clocksurce for the MPU 9250, restes MPU and put in standby
 #define PWR_MGMT_2       0x6C // Enables and Disables the Gyro and Accel axis
-// Magnetometer stuff
-#define AK8963_ADDRESS   0x0C
-#define WHO_AM_I_AK8963  0x00 // ID of AK8963 should return 0x48
-#define AK8963_ST1       0x02  // data ready status bit 0
-#define AK8963_XOUT_L    0x03  // Mganetometer data
-#define AK8963_XOUT_H    0x04
-#define AK8963_CNTL      0x0A // Used to set the reading mode or to power down
-#define AK8963_CNTL2     0x0B // Used to Reset manetometer
-#define AK8963_ASAX      0x10 // Sensitivity values
 
 
 #define RadToDeg         180/3.14159265359
@@ -154,7 +145,7 @@ void loop() {
     Serial.print(" AccYcalib,");
     Serial.print(AccYcalib,4);
     Serial.print(" AccZcalib, ");
-    Serial.println(AccZcalib,4);
+    Serial.println(1-AccZcalib,4);
     b=0;
    }
   

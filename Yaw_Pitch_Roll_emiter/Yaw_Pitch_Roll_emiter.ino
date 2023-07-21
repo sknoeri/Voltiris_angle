@@ -54,9 +54,9 @@ float AccX, AccY, AccZ;
 float AngleRoll,AnglePitch,AngleYaw;
 uint32_t LoopTimer;
 //Offset calibration Accelerometer
-float AccXcalib=0.03935;
-float AccYcalib=-0.01443;
-float AccZcalib=0.03771;
+float AccXcalib=0.0421;
+float AccYcalib=-0.0209;
+float AccZcalib=0.0404;
 //Kalman filter constants
 float KalAngleRoll=0,KalUncertAngleRoll=4;
 float KalAnglePitch=0,KalUncertAnglePitch=4;
@@ -65,11 +65,11 @@ float Kal1DOut[]={0,0};
 
 /////////////////////////////////////////////////////
 //Magnetometer sutff
-const float hard_iron[3] ={-3.17, 2.83, -56.51}; //Hard iron calibration from soft ware
+const float hard_iron[3] ={-1.83, 3.42, -53.45}; //Hard iron calibration from soft ware
 const float soft_iron[3][3]={        //Soft iron calibrations from soft ware
-  {1.056,-0.02,-0.012},
-  {-0.02,0.886,0.083},
-  {-0.012,0.083,1.077}
+  {1.031,-0.023,-0.027},
+  {-0.023,0.918,0.050},
+  {-0.027,0.050,1.060}
 };
 float Mag_x_hor, Mag_y_hor;
 float Sense_adjX, Sense_adjY,Sense_adjZ;
