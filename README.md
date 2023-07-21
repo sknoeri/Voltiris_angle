@@ -1,7 +1,7 @@
 # Voltiris_angle
 
 ## Set up the MPU-92500 for angle measurement
-Markup :-1)
+Markup : -1)
             -Wire the MPU-92500, Arduino Nano and the NRF24L01 module correctly together.
               -Use the Pinconfiguration_angledetection.pdf to get a picture.
               -Teh emiter module is with the MPU-92500 and the reciver module is the same but without the MPU-92500.
