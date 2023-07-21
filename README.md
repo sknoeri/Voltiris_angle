@@ -2,7 +2,7 @@
 
 ## Set up the MPU-92500 for angle measurement
 
-1) Wire the MPU-92500, Arduino Nano and the NRF24L01 module correctly together. [Named Link](http://www.google.fr/ "Named link title") and http://www.google.fr/ or <http://example.com/>
+1) Wire the MPU-92500, Arduino Nano and the NRF24L01 module correctly together. [Named Link](http://www.google.fr/ "Named link title")
     - Use the [Pinconfiguration_angledetection.pdf] to get a picture.
     - Teh emiter module is with the MPU-92500 and the reciver module is the same but without the MPU-92500.
 
