@@ -25,4 +25,15 @@ Markup : - 1
               - Flash the code of Yaw_Pitch_Roll_emiter.ino to the module witch is used as an emitter.
               - Flash the code of Yaw_Pitch_Roll_reciver.ino to the module witch is used as an reciver.
               - Open serial monitor on the Arduino IDE of the reciver to observe the recive angle data. 
-  
+
+   Markup : * Bullet list
+              * Nested bullet
+                  * Sub-nested bullet etc
+          * Bullet list item 2
+
+-OR-
+
+ Markup : - Bullet list
+              - Nested bullet
+                  - Sub-nested bullet etc
+          - Bullet list item 2 
