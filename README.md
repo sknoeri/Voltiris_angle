@@ -3,10 +3,10 @@
 ## Set up the MPU-92500 for angle measurement
 
 1) Wire the MPU-92500, Arduino Nano and the NRF24L01 module correctly together.
-    - Use the [Pinconfiguration_angledetection.pdf] to get a picture.
+    - Use the [Pinconfiguration_angledetection.pdf](https://github.com/sknoeri/Voltiris_angle/blob/main/Pinconfiguration_angledetection.pdf "Pinconfiguration_angledetection.pdf title") to get a picture.
     - Teh emiter module is with the MPU-92500 and the reciver module is the same but without the MPU-92500.
 
-2) Calibrate the accelerometer with [Accel_calib.ino](http://www.google.fr/ "Accel_calib.ino title").
+2) Calibrate the accelerometer with [Accel_calib.ino](https://github.com/sknoeri/Voltiris_angle/blob/main/Accel_calib/Accel_calib.ino "Accel_calib.ino title").
     - Falsh the code onto the Arduino nano asembled in the final box.
     - Put the box on a perfectly flat surface (Use a Wasserwage to check if its flat)
     - Open the Serial monitor of the Arduino IDE
@@ -22,7 +22,7 @@
     - Is not working well fort the Yaw measurement therefore not explaind
 
 4) Setup the reciver and emiter module for gatering the angle data toogether.
-    - Flash the code of [Yaw_Pitch_Roll_emiter.ino] to the module witch is used as an emitter.
-    - Flash the code of [Yaw_Pitch_Roll_reciver.ino] to the module witch is used as an reciver.
+    - Flash the code of [Yaw_Pitch_Roll_emiter.ino](https://github.com/sknoeri/Voltiris_angle/blob/main/Yaw_Pitch_Roll_emiter/Yaw_Pitch_Roll_emiter.ino "Yaw_Pitch_Roll_emiter.ino title") to the module witch is used as an emitter.
+    - Flash the code of [Yaw_Pitch_Roll_reciver.ino](https://github.com/sknoeri/Voltiris_angle/blob/main/Magnetometer_CALIB_reciver/Magnetometer_CALIB_reciver.ino "Yaw_Pitch_Roll_emiter.ino title") to the module witch is used as an reciver.
     - Open serial monitor on the Arduino IDE of the reciver to observe the recive angle data. 
 
