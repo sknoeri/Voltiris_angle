@@ -16,8 +16,8 @@
     - AccN      =The raw data directly out of the accelerometer of the Nth direction without any calibartion.
     - AccNcalib =The calibration value used to calibrate AccN_cal int he Nth direction.
     - Chose one line whre AccX_cal, AccY_cal, AccZ_cal are all 0 (or very close).
-    - Set copy the calibration values AccXcalib, AccYcalib, AccZcalib of this line into Yaw_Pitch_Roll_emiter.ino.
-    - 
+    - Set copy the calibration values AccXcalib, AccYcalib, AccZcalib of this line into Yaw_Pitch_Roll_emiter.ino(https://github.com/sknoeri/Voltiris_angle/blob/main/Magnetometer_CALIB_reciver/Magnetometer_CALIB_reciver.ino "Yaw_Pitch_Roll_emiter.ino title").
+
 3) Calibrate the Magnetometer
     - Is not working well fort the Yaw measurement therefore not explaind
 
